@@ -1,6 +1,6 @@
 import json
 import os
-import pprint
+import argparse
 
 
 def load_data(filepath):
@@ -11,9 +11,13 @@ def load_data(filepath):
 
 
 def pretty_print_json(data):
-    pprint.PrettyPrinter().pprint(data)
+    print (json.dumps(data, indent=4, ensure_ascii=False))
 
 
 if __name__ == '__main__':
-    bars = load_data('bars.json')
-    pretty_print_json(bars)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--path', help="Path to file", required=True)
+    args = parser.parse_args()
+
+    data = load_data(args.path)
+    pretty_print_json(data)
